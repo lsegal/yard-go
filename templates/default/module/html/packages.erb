@@ -1,0 +1,4 @@
+<div id="subpackages">
+<h2 class="packages">Sub-Packages</h2>
+<p class="children"><%= @packages.map {|pkg| link_object(pkg, pkg.name) }.join(", ") %></p>
+</div>

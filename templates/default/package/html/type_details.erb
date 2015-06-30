@@ -1,0 +1,9 @@
+<% if @types.size > 0 %>
+  <div id="type_details" class="method_details_list">
+    <h2>Type Details</h2>
+
+    <% @types.each_with_index do |type, i| %>
+      <%= yieldall :object => type, :owner => object, :index => i %>
+    <% end %>
+  </div>
+<% end %>

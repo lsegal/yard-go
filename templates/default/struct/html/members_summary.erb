@@ -1,0 +1,12 @@
+<% if @members.size > 0 %>
+  <h2>
+    Structure Member Summary
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    <% @members.each do |t| %>
+      <%= yieldall :item => t %>
+    <% end %>
+  </ul>
+<% end %>

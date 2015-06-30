@@ -1,0 +1,22 @@
+<% {"Constants" => constant_listing, "Variables" => variable_listing}.each do |title, cnsts| %>
+  <% if cnsts.size > 0 %>
+    <h2><%= title %></h2>
+    <% if cnsts.size > 0 %>
+      <dl class="constants">
+        <% cnsts.each do |cnst| %>
+          <dt id="<%= anchor_for(cnst) %>" class="<%= cnst.has_tag?(:deprecated) ? 'deprecated' : '' %>">
+          <div class="defn"><%= cnst.tag(:constant_type).text %> <strong><%= cnst.name %></strong> <%= signature_types cnst %> = 
+          <% if cnst.has_tag?(:readonly) %><span class="note title readonly">readonly</span>
+          <% else %><span class="note title writeonly">writable</span><% end %>
+          </div>
+            <%= yieldall :object => cnst %>
+          </dt>
+          <dd>
+            <h3>Value:</h3>
+            <pre class="code"><%= link_types(format_constant(cnst.value)) %></pre>
+          </dd>
+        <% end %>
+      </dl>
+    <% end %>
+  <% end %>
+<% end %>

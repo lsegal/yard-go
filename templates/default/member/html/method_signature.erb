@@ -1,0 +1,4 @@
+<h3 class="signature <%= 'first' if @index == 0 %>" id="<%= anchor_for(object) %>">
+  <%= signature(object, false) %> 
+  <% if object.tag(:gotags).text && !object.tag(:gotags).text.empty? %><code>`<%= object.tag(:gotags).text %>`</code><% end %>
+</h3>

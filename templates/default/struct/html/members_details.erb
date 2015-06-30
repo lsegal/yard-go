@@ -1,0 +1,9 @@
+<% if @members.size > 0 %>
+  <div id="type_details" class="method_details_list">
+    <h2>Structure Member Details</h2>
+
+    <% @members.each_with_index do |member, i| %>
+      <%= yieldall :object => member, :owner => object, :index => i %>
+    <% end %>
+  </div>
+<% end %>

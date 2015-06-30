@@ -1,0 +1,15 @@
+<div class="tags">
+<p class="tag_title">Structure Members:</p>
+<dl class="members">
+<% @members.sort_by {|m| m.tag(:gotags) && m.tag(:gotags).text =~ /required:"true"/ ? -1 : 1 }.each do |m| %>
+  <dt><code>
+    <strong><%= m.name %></strong> <%= signature_types m %> 
+    <% if m.tag(:gotags) && m.tag(:gotags).text =~ /required:"true"/ %><span class="note title readonly">required</span><% end %>
+  </code></dt>
+  <dd><%= htmlify m.docstring %></dd>
+<% end %>
+<% if @members.size == 0 %>
+  <dt><em>(empty struct)</em></dt>
+<% end %>
+</dl>
+</div>
