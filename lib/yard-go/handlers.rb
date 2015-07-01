@@ -41,7 +41,7 @@ module YARDGo
       process do
         return if test_file?
 
-        ns = if statement.meths.size > 0 # it's a "class"
+        ns = if regular_meths.size > 0 # it's a "class"
           register StructObject.new(pkg, statement.name)
         else # bare struct
           register BareStructObject.new(pkg, statement.name)
@@ -49,6 +49,10 @@ module YARDGo
 
         parse_block(statement.meths, namespace: ns)
         parse_block(statement.members, namespace: ns)
+      end
+
+      def regular_meths
+        statement.meths.reject {|s| s.name =~ /^(Go)?String$/ }
       end
     end
 
