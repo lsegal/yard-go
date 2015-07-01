@@ -25,7 +25,7 @@ module LinkHelpers
 
   def signature(obj, link = true, show_extras = true, full_attr_name = true)
     case obj
-    when MemberObject
+    when FieldObject
       ret = obj.has_tag?(:return) ? obj.tag(:return).types.join(", ") : ""
       if link
         return linkify obj, "<strong>#{obj.name}</strong> #{ret}"

@@ -48,7 +48,7 @@ module YARDGo
         end
 
         parse_block(statement.meths, namespace: ns)
-        parse_block(statement.members, namespace: ns)
+        parse_block(statement.fields, namespace: ns)
       end
 
       def regular_meths
@@ -63,7 +63,7 @@ module YARDGo
         return if test_file?
 
         obj = register InterfaceObject.new(pkg, statement.name)
-        parse_block(statement.members, namespace: obj)
+        parse_block(statement.fields, namespace: obj)
       end
     end
 
@@ -116,8 +116,8 @@ module YARDGo
       end
     end
 
-    class MemberFnHandler < Base
-      handles :memberfn
+    class FieldFnHandler < Base
+      handles :fieldfn
 
       process do
         return if test_file?
@@ -133,14 +133,14 @@ module YARDGo
 
     end
 
-    class MemberHandler < Base
-      handles :member
+    class FieldHandler < Base
+      handles :field
 
       process do
         return if test_file?
 
-        obj = register MemberObject.new(namespace, statement.name, :instance)
-        obj.add_tag YARD::Tags::Tag.new(:return, '', [statement.member_type])
+        obj = register FieldObject.new(namespace, statement.name, :instance)
+        obj.add_tag YARD::Tags::Tag.new(:return, '', [statement.field_type])
         obj.add_tag YARD::Tags::Tag.new(:gotags, statement.tags)
       end
     end

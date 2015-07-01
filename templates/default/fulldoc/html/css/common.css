@@ -1,4 +1,4 @@
-#content .tags dl.members { margin-left: 30px; }
+#content .tags dl.fields { margin-left: 30px; }
 #content .inline-objects p.children { line-height: 2.4em; }
 #content .inline-objects p.children .object_link a {
   font-family: monospace;

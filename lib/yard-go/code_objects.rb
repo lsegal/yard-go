@@ -52,13 +52,13 @@ module YARDGo
       def source_type; :go end
     end
 
-    class MemberObject < YARD::CodeObjects::Base
+    class FieldObject < YARD::CodeObjects::Base
       def sep; '::' end
-      def type; :member end
+      def type; :field end
       def title; namespace.title + "." + name.to_s end
       def source_type; :go end
 
-      attr_accessor :member_type, :go_tags
+      attr_accessor :field_type, :go_tags
     end
 
     class InterfaceObject < StructObject

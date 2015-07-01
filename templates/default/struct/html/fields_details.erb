@@ -1,0 +1,9 @@
+<% if @fields.size > 0 %>
+  <div id="type_details" class="method_details_list">
+    <h2>Structure Field Details</h2>
+
+    <% @fields.each_with_index do |field, i| %>
+      <%= yieldall :object => field, :owner => object, :index => i %>
+    <% end %>
+  </div>
+<% end %>

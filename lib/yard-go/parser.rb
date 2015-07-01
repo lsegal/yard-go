@@ -62,11 +62,11 @@ module YARDGo
 
           when @@matches[:struct]
             t = init_struct($1)
-            consume_members(t)
+            consume_fields(t)
 
           when @@matches[:interface]
-            t = s(:interface, name: $1, members: [])
-            consume_members(t)
+            t = s(:interface, name: $1, fields: [])
+            consume_fields(t)
             @ast << t
 
           when @@matches[:method]
@@ -130,10 +130,10 @@ module YARDGo
       private
 
       def init_struct(name)
-        @structs[name] ||= s(:struct, name: name, members: [], meths: [])
+        @structs[name] ||= s(:struct, name: name, fields: [], meths: [])
       end
 
-      def consume_members(t)
+      def consume_fields(t)
         @lineno += 1
         consume_until @@matches[:close_brace] do
           case line
@@ -142,11 +142,11 @@ module YARDGo
           when /^\s*\*?([\w\.]+)\s*(?:`(.+?)`)?\s*$/
             path, tags = $1, $2
             name = path.split('.').last
-            t.members.push(s(:composition, name: name, path: path, tags: tags))
+            t.fields.push(s(:composition, name: name, path: path, tags: tags))
           when /^\s*(\w+)(\(.*?\))\s*(.*)?\s*(?:`(.+?)`)?\s*$/
-            t.members.push(s(:memberfn, name: $1, args: $3, ret: $4, tags: $5))
+            t.fields.push(s(:fieldfn, name: $1, args: $3, ret: $4, tags: $5))
           when /^\s*(\w+)\s*(\S+)\s*(?:`(.+?)`)?\s*$/
-            t.members.push(s(:member, name: $1, member_type: $2, tags: $3))
+            t.fields.push(s(:field, name: $1, field_type: $2, tags: $3))
           else
             clear_comments
           end

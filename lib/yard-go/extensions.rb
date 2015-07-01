@@ -31,8 +31,8 @@ class YARD::CLI::Stats
     output "Interfaces", *type_statistics(:interface)
   end
 
-  def stats_for_members
-    output "Members", *type_statistics(:member)
+  def stats_for_fields
+    output "Fields", *type_statistics(:field)
   end
 end
 
