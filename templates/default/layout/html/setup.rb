@@ -4,7 +4,6 @@ end
 
 def menu_lists
 [ { :type => 'package', :title => 'Packages', :search_title => 'Package List' },
-  { :type => 'function', :title => 'Functions', :search_title => 'Function List' },
   { :type => 'method', :title => 'Methods', :search_title => 'Method List' },
   { :type => 'file', :title => 'Files', :search_title => 'File List' } ]
 end
