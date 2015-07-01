@@ -47,7 +47,7 @@ module YARDGo
     class FuncObject < YARD::CodeObjects::MethodObject
       def sep; '.' end
       def type; :method end
-      def title; super + "()" end
+      def title; parent.title + "." + name.to_s + "()" end
       def scope_name; has_tag?(:abstract) ? "Interface Method" : (scope == :class ? "Function" : "Method") end
       def source_type; :go end
     end
