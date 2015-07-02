@@ -5,8 +5,12 @@
   <dt><code>
     <strong><%= m.name %></strong> <%= signature_types m %> 
     <% if m.tag(:gotags) && m.tag(:gotags).text =~ /required:"true"/ %><span class="note title readonly">required</span><% end %>
+    <% if m.tag(:gotags) && m.tag(:gotags).text =~ /enum:"(.+)"/ %><span class="note title enum">enum</span><% end %>
   </code></dt>
-  <dd><%= htmlify m.docstring %></dd>
+  <dd>
+    <%= htmlify m.docstring %>
+    <%= yieldall :object => m %>
+  </dd>
 <% end %>
 <% if @fields.size == 0 %>
   <dt><em>(empty struct)</em></dt>

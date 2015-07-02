@@ -12,3 +12,4 @@ YARD::Parser::SourceParser.register_parser_type(:go, YARDGo::Parser::Go, 'go')
 YARD::Handlers::Processor.register_handler_namespace(:go, YARDGo::Handlers)
 YARD::Tags::Library.visible_tags -= [:return]
 YARD::Tags::Library.define_tag "Read-only", :readonly
+YARD::Tags::Library.define_tag "Enum", :enum

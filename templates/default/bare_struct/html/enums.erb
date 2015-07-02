@@ -1,0 +1,12 @@
+<div class="tags">
+<p class="tag_title">Enum Values:</p>
+<dl class="enums">
+<% @enums.sort_by {|e| e.name.to_s }.each do |e| %>
+  <dt><code><strong><%= linkify e.parent, e.parent.name %>.<%= e.name %></strong> =</code></dt>
+  <dd><code><%= html_syntax_highlight_go e.value %></code></dd>
+<% end %>
+<% if @enums.size == 0 %>
+  <dt><em>(no defined enumerable values)</em></dt>
+<% end %>
+</dl>
+</div>

@@ -1,3 +1,4 @@
+#content .tags dl.enums { margin-left: 30px; }
 #content .tags dl.fields { margin-left: 30px; }
 #content .inline-objects p.children { line-height: 2.4em; }
 #content .inline-objects p.children .object_link a {
@@ -30,4 +31,10 @@
   background: #FEFFE1;
   border-color: #D9DBBC;
 }
+.note.title.enum {
+  background: #204B66;
+  color: #fff;
+  border-color: #315773;
+}
+dl.enums .hljs { background: transparent; }
 pre, code { tab-size: 2; }

@@ -44,6 +44,26 @@ module YARDGo
       def source_type; :go end
     end
 
+    class TypeObject < YARD::CodeObjects::Base
+      def sep; '.' end
+      def type; :type end
+      def source_type; :go end
+      attr_accessor :alias_type
+    end
+
+    class EnumObject < TypeObject
+      def sep; '.' end
+      def type; :enum end
+      def source_type; :go end
+
+      attr_accessor :enums
+
+      def initialize(*args)
+        super
+        self.enums = {}
+      end
+    end
+
     class FuncObject < YARD::CodeObjects::MethodObject
       def sep; '.' end
       def name(str = false) str ? super(false).to_s : super(false) end

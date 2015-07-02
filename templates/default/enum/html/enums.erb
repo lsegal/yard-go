@@ -1,0 +1,12 @@
+<div class="tags">
+<p class="tag_title">Enum Values:</p>
+<dl class="enums">
+<% object.enums.sort_by {|k,_| k }.each do |k, v| %>
+  <dt><code><strong><%= k %></strong> =</code></dt>
+  <dd><code><%= html_syntax_highlight_go v %></code></dd>
+<% end %>
+<% if object.enums.size == 0 %>
+  <dt><em>(no defined enumerable values)</em></dt>
+<% end %>
+</dl>
+</div>

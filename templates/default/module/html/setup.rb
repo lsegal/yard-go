@@ -6,11 +6,15 @@ end
 alias orig_constant_listing constant_listing
 
 def constant_listing
-  @go_constant_listing ||= orig_constant_listing.select {|o| o.tag(:constant_type).text == "const" }
+  @go_constant_listing ||= orig_constant_listing.
+    select {|o| o.tag(:constant_type).text == "const" }.
+    reject {|o| o.has_tag?(:enum) }
 end
 
 def variable_listing
-  @go_variable_listing ||= orig_constant_listing.select {|o| o.tag(:constant_type).text == "var" }
+  @go_variable_listing ||= orig_constant_listing.
+    select {|o| o.tag(:constant_type).text == "var" }.
+    reject {|o| o.has_tag?(:enum) }
 end
 
 def scopes(list)

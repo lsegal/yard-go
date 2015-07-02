@@ -3,7 +3,7 @@ module LinkHelpers
 
   def link_object(obj, title = nil, anchor = nil, relative = true)
     case obj
-    when BareStructObject
+    when BareStructObject, EnumObject
       origobj = object
       @object = object.namespace if BareStructObject === object
       link = super(obj.namespace, title || obj.name, anchor_for(obj), true)
@@ -25,6 +25,12 @@ module LinkHelpers
 
   def signature(obj, link = true, show_extras = true, full_attr_name = true)
     case obj
+    when EnumObject
+      if link
+        return linkify obj, "<strong>#{obj.name}</strong> #{obj.alias_type}"
+      else
+        return "<strong>#{obj.name}</strong> #{link_types(obj.alias_type)}"
+      end
     when FieldObject
       ret = obj.has_tag?(:return) ? obj.tag(:return).types.join(", ") : ""
       if link

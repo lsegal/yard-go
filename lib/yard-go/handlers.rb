@@ -56,6 +56,19 @@ module YARDGo
       end
     end
 
+    class EnumHandler < Base
+      handles :type_alias
+
+      process do
+        return if test_file?
+
+        if statement.comments && statement.comments.include?("@enum")
+          obj = register EnumObject.new(pkg, statement.name)
+          obj.alias_type = statement.alias_type
+        end
+      end
+    end
+
     class InterfaceHandler < Base
       handles :interface
 
@@ -160,6 +173,13 @@ module YARDGo
 
       process do
         return if test_file?
+
+        if statement.type == :const && statement.vartype
+          obj = P(pkg, statement.vartype)
+          if EnumObject === obj
+            return obj.enums[statement.name] = statement.value
+          end
+        end
 
         obj = register ConstantObject.new(pkg, statement.name)
 

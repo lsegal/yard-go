@@ -15,6 +15,7 @@ module YARDGo
         package: /^package (\w+)/,
         function: /^func (\w+)\((.*?)\)(.*?)\{/,
         struct: /^type (\w+) struct\s+\{/,
+        type_alias: /^type (\w+) (\*?\w+)\s*/,
         interface: /^type (\w+) interface\s+\{/,
         method: /^func \(\w+\s+\*?(.+?)\) (\w+)\((.*?)\)(.*)\{/,
         close_brace: /^\}/,
@@ -68,6 +69,9 @@ module YARDGo
             t = s(:interface, name: $1, fields: [])
             consume_fields(t)
             @ast << t
+
+          when @@matches[:type_alias]
+            @ast << s(:type_alias, name: $1, alias_type: $2)
 
           when @@matches[:method]
             t = init_struct($1)
