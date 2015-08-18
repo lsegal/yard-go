@@ -41,7 +41,7 @@ module YARDGo
       process do
         return if test_file?
 
-        ns = if regular_meths.size > 0 # it's a "class"
+        ns = if regular_meths.size > 0 || P(pkg, statement.name).type == :struct # it's a "class"
           register StructObject.new(pkg, statement.name)
         else # bare struct
           register BareStructObject.new(pkg, statement.name)
