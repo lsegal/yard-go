@@ -1,3 +1,7 @@
+if ENV["GOPATH"].nil?
+  raise "GOPATH environment variable must be set to use the yard-go plugin"
+end
+
 require 'yard'
 
 require_relative './yard-go/code_objects'
